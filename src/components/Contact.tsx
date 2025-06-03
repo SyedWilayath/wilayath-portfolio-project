@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Mail, Phone, Linkedin, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -50,8 +49,8 @@ const Contact: React.FC<ContactProps> = ({ darkMode }) => {
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      value: 'linkedin.com/in/SyedWilayath',
-      href: 'https://www.linkedin.com/in/SyedWilayath'
+      value: 'linkedin.com/in/syed-wilayath-khadari',
+      href: 'https://www.linkedin.com/in/syed-wilayath-khadari/'
     }
   ];
 
