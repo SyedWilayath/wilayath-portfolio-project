@@ -16,6 +16,10 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#projects', label: 'Projects' },
+    { href: '#timeline', label: 'Journey' },
+    { href: '#certifications', label: 'Certifications' },
+    { href: '#blog', label: 'Blog' },
+    { href: '#testimonials', label: 'Testimonials' },
     { href: '#contact', label: 'Contact' },
   ];
 
@@ -40,12 +44,12 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6">
             {navItems.map((item) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className={`transition-colors duration-200 hover:text-blue-600 ${
+                className={`transition-colors duration-200 hover:text-blue-600 text-sm ${
                   darkMode ? 'text-gray-300' : 'text-gray-700'
                 }`}
               >
@@ -65,7 +69,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="lg:hidden flex items-center space-x-2">
             <button
               onClick={toggleDarkMode}
               className={`p-2 rounded-lg transition-colors duration-200 ${
@@ -91,7 +95,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className={`md:hidden py-4 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+          <div className={`lg:hidden py-4 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
             {navItems.map((item) => (
               <button
                 key={item.href}

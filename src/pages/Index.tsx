@@ -5,6 +5,10 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
+import Timeline from '@/components/Timeline';
+import Certifications from '@/components/Certifications';
+import Blog from '@/components/Blog';
+import Testimonials from '@/components/Testimonials';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
@@ -40,6 +44,10 @@ const Index = () => {
       <About darkMode={darkMode} />
       <Skills darkMode={darkMode} />
       <Projects darkMode={darkMode} />
+      <Timeline darkMode={darkMode} />
+      <Certifications darkMode={darkMode} />
+      <Blog darkMode={darkMode} />
+      <Testimonials darkMode={darkMode} />
       <Contact darkMode={darkMode} />
       <Footer darkMode={darkMode} />
     </div>
