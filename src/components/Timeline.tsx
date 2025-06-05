@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { Calendar, MapPin, TrendingUp, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, TrendingUp } from 'lucide-react';
 
 interface TimelineProps {
   darkMode: boolean;
@@ -110,15 +109,6 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
           }`}>
             My professional growth and achievements in Software Testing & Quality Engineering
           </p>
-          <a 
-            href="https://www.linkedin.com/in/syed-wilayath-khadari/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors duration-200`}
-          >
-            <span>View Full Profile on LinkedIn</span>
-            <ExternalLink size={16} />
-          </a>
           <div className="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
         </div>
 
