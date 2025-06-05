@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Calendar, MapPin, TrendingUp } from 'lucide-react';
 
@@ -9,72 +10,34 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
   const timelineEvents = [
     {
       id: 1,
-      year: "2024 - Present",
-      title: "Senior Software Development Engineer in Test (SDET)",
-      company: "Current Role",
-      location: "Bangalore, India",
+      year: "Sep 2023 - Present",
+      title: "Associate",
+      company: "Cognizant",
+      location: "Hyderabad, Telangana, India · Hybrid",
       type: "current",
-      description: "Leading test automation initiatives and establishing quality engineering practices across multiple teams.",
+      description: "As an SDET on the IELTS project, I played a crucial role in understanding business requirements and framing automated test scenarios. I developed automation test scripts for both frontend and backend testing using Selenium and Rest Assured in Java.",
       achievements: [
-        "Implementing comprehensive test automation frameworks",
-        "Mentoring junior SDETs and QA engineers",
-        "Driving quality gates in CI/CD pipelines"
+        "Developed automation test scripts for frontend and backend testing using Selenium and Rest Assured in Java",
+        "Leveraged AWS components, MongoDB for data management, SQL for database queries, WireMock for API mocking",
+        "Guided the team in scripting and test scenario identification within Agile methodology",
+        "Demonstrated testing results to clients, providing transparency and building confidence in software quality",
+        "Reviewed test scenarios post-completion to ensure thoroughness and accuracy"
       ]
     },
     {
       id: 2,
-      year: "2022 - 2024",
-      title: "Software Development Engineer in Test",
-      company: "Previous Experience",
-      location: "Bangalore, India", 
+      year: "Sep 2021 - Sep 2023",
+      title: "Programming Analyst",
+      company: "Cognizant",
+      location: "Hyderabad, Telangana, India",
       type: "experience",
-      description: "Specialized in developing robust test automation solutions and improving testing efficiency across projects.",
+      description: "As an SDET on the IELTS project, I played a crucial role in understanding business requirements and framing automated test scenarios. I developed automation test scripts for both frontend and backend testing using Selenium and Rest Assured in Java.",
       achievements: [
-        "Built scalable automation frameworks using Selenium and REST Assured",
-        "Achieved significant reduction in manual testing effort",
-        "Integrated testing processes with DevOps pipelines"
-      ]
-    },
-    {
-      id: 3,
-      year: "2020 - 2022",
-      title: "Test Automation Engineer",
-      company: "Quality Assurance Role",
-      location: "India",
-      type: "experience", 
-      description: "Focused on automated testing implementation and quality assurance processes for web and mobile applications.",
-      achievements: [
-        "Developed automated test suites for multiple projects",
-        "Implemented data-driven testing approaches",
-        "Improved test coverage and reliability"
-      ]
-    },
-    {
-      id: 4,
-      year: "2018 - 2020",
-      title: "QA Engineer",
-      company: "Early Career",
-      location: "India",
-      type: "experience",
-      description: "Started career in manual testing and progressively moved towards automation testing and quality engineering.",
-      achievements: [
-        "Executed comprehensive manual testing procedures",
-        "Learned test automation tools and frameworks",
-        "Contributed to agile development processes"
-      ]
-    },
-    {
-      id: 5,
-      year: "2018",
-      title: "Bachelor of Technology",
-      company: "Engineering Degree",
-      location: "India",
-      type: "education",
-      description: "Completed engineering education with focus on software development and quality engineering principles.",
-      achievements: [
-        "Strong foundation in software engineering",
-        "Developed interest in quality assurance",
-        "Built programming and analytical skills"
+        "Built comprehensive test automation framework using AWS components and MongoDB",
+        "Implemented API testing and mocking solutions using WireMock",
+        "Managed project workflows using Jira and documented processes in Confluence",
+        "Applied Agile methodology for efficient project delivery",
+        "Ensured software quality through rigorous testing and scenario validation"
       ]
     }
   ];
@@ -107,7 +70,7 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
           <p className={`text-xl mb-4 ${
             darkMode ? 'text-gray-300' : 'text-gray-600'
           }`}>
-            My professional growth and achievements in Software Testing & Quality Engineering
+            My professional experience in Software Testing & Quality Engineering at Cognizant
           </p>
           <div className="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
         </div>
@@ -123,7 +86,7 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
               {/* Timeline dot */}
               <div className={`flex-shrink-0 w-16 h-16 rounded-full ${getTypeColor(event.type)} 
                 flex items-center justify-center text-white font-bold text-lg shadow-lg z-10`}>
-                {event.type === 'education' ? '🎓' : '💼'}
+                💼
               </div>
 
               {/* Content */}
