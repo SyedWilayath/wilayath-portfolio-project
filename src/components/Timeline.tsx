@@ -15,7 +15,7 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
       company: "Cognizant",
       location: "Hyderabad, Telangana, India · Hybrid",
       type: "current",
-      description: "As an SDET on the IELTS project, I played a crucial role in understanding business requirements and framing automated test scenarios. I developed automation test scripts for both frontend and backend testing using Selenium and Rest Assured in Java.",
+      description: "As an SDET on the IELTS project, I played a crucial role in understanding business requirements and framing automated test scenarios. I developed automation test scripts for both frontend and backend testing using Selenium and Rest Assured in Java. Our test automation framework leveraged AWS components, MongoDB for data management, SQL for database queries, WireMock for API mocking, Jira for project management, and Confluence for documentation, all within an Agile methodology. I guided the team in scripting and test scenario identification, and upon completing feature testing, I demonstrated the results to the client, providing transparency and building confidence in the software quality. Additionally, I reviewed test scenarios post-completion to ensure thoroughness and accuracy.",
       achievements: [
         "Developed automation test scripts for frontend and backend testing using Selenium and Rest Assured in Java",
         "Leveraged AWS components, MongoDB for data management, SQL for database queries, WireMock for API mocking",
@@ -31,13 +31,29 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
       company: "Cognizant",
       location: "Hyderabad, Telangana, India",
       type: "experience",
-      description: "As an SDET on the IELTS project, I played a crucial role in understanding business requirements and framing automated test scenarios. I developed automation test scripts for both frontend and backend testing using Selenium and Rest Assured in Java.",
+      description: "As an SDET on the IELTS project, I played a crucial role in understanding business requirements and framing automated test scenarios. I developed automation test scripts for both frontend and backend testing using Selenium and Rest Assured in Java. Our test automation framework leveraged AWS components, MongoDB for data management, SQL for database queries, WireMock for API mocking, Jira for project management, and Confluence for documentation, all within an Agile methodology. I guided the team in scripting and test scenario identification, and upon completing feature testing, I demonstrated the results to the client, providing transparency and building confidence in the software quality. Additionally, I reviewed test scenarios post-completion to ensure thoroughness and accuracy.",
       achievements: [
         "Built comprehensive test automation framework using AWS components and MongoDB",
         "Implemented API testing and mocking solutions using WireMock",
         "Managed project workflows using Jira and documented processes in Confluence",
         "Applied Agile methodology for efficient project delivery",
         "Ensured software quality through rigorous testing and scenario validation"
+      ]
+    },
+    {
+      id: 3,
+      year: "Feb 2021 - Aug 2021",
+      title: "Trainee",
+      company: "Cognizant",
+      location: "Hyderabad, Telangana, India",
+      type: "experience",
+      description: "Started my career journey at Cognizant as a Trainee, focusing on learning core testing fundamentals and software development lifecycle processes. Gained hands-on experience with testing methodologies and automation tools during the comprehensive training program.",
+      achievements: [
+        "Completed comprehensive training program on software testing fundamentals",
+        "Learned automation testing tools and frameworks",
+        "Gained understanding of SDLC and Agile methodologies",
+        "Participated in hands-on projects to apply theoretical knowledge",
+        "Built foundation for career in Software Development Engineering in Test (SDET)"
       ]
     }
   ];
