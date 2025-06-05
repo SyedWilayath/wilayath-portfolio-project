@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Calendar, MapPin, TrendingUp } from 'lucide-react';
+import { Calendar, MapPin, TrendingUp, ExternalLink } from 'lucide-react';
 
 interface TimelineProps {
   darkMode: boolean;
@@ -10,72 +10,72 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
   const timelineEvents = [
     {
       id: 1,
-      year: "2024",
-      title: "Lead SDET",
-      company: "Tech Innovation Corp",
-      location: "Remote",
+      year: "2024 - Present",
+      title: "Senior Software Development Engineer in Test (SDET)",
+      company: "Current Role",
+      location: "Bangalore, India",
       type: "current",
-      description: "Leading a team of 8 SDETs, implementing advanced test automation frameworks, and establishing quality gates for CI/CD pipelines.",
+      description: "Leading test automation initiatives and establishing quality engineering practices across multiple teams.",
       achievements: [
-        "Reduced test execution time by 70%",
-        "Implemented API testing strategy covering 95% endpoints",
-        "Mentored 5 junior SDETs to senior level"
+        "Implementing comprehensive test automation frameworks",
+        "Mentoring junior SDETs and QA engineers",
+        "Driving quality gates in CI/CD pipelines"
       ]
     },
     {
       id: 2,
-      year: "2022-2024",
-      title: "Senior SDET",
-      company: "Digital Solutions Ltd",
-      location: "Bangalore, India",
+      year: "2022 - 2024",
+      title: "Software Development Engineer in Test",
+      company: "Previous Experience",
+      location: "Bangalore, India", 
       type: "experience",
-      description: "Designed and developed comprehensive test automation frameworks using Selenium and REST Assured for web and API testing.",
+      description: "Specialized in developing robust test automation solutions and improving testing efficiency across projects.",
       achievements: [
-        "Built scalable automation framework from scratch",
-        "Achieved 90% test automation coverage",
-        "Integrated testing with Jenkins CI/CD pipeline"
+        "Built scalable automation frameworks using Selenium and REST Assured",
+        "Achieved significant reduction in manual testing effort",
+        "Integrated testing processes with DevOps pipelines"
       ]
     },
     {
       id: 3,
-      year: "2020-2022",
+      year: "2020 - 2022",
       title: "Test Automation Engineer",
-      company: "QualityFirst Systems",
-      location: "Hyderabad, India",
-      type: "experience",
-      description: "Specialized in developing automated test scripts and implementing quality assurance processes for multiple client projects.",
+      company: "Quality Assurance Role",
+      location: "India",
+      type: "experience", 
+      description: "Focused on automated testing implementation and quality assurance processes for web and mobile applications.",
       achievements: [
-        "Automated 200+ test cases across 5 projects",
-        "Reduced manual testing effort by 60%",
-        "Implemented data-driven testing approaches"
+        "Developed automated test suites for multiple projects",
+        "Implemented data-driven testing approaches",
+        "Improved test coverage and reliability"
       ]
     },
     {
       id: 4,
-      year: "2018-2020",
-      title: "Junior QA Engineer",
-      company: "StartupTech Inc",
-      location: "Chennai, India",
+      year: "2018 - 2020",
+      title: "QA Engineer",
+      company: "Early Career",
+      location: "India",
       type: "experience",
-      description: "Started career in manual testing and gradually transitioned to automation testing using Selenium WebDriver.",
+      description: "Started career in manual testing and progressively moved towards automation testing and quality engineering.",
       achievements: [
-        "Executed 500+ manual test cases",
-        "Learned Selenium and Java programming",
+        "Executed comprehensive manual testing procedures",
+        "Learned test automation tools and frameworks",
         "Contributed to agile development processes"
       ]
     },
     {
       id: 5,
       year: "2018",
-      title: "B.Tech in Computer Science",
-      company: "University of Technology",
+      title: "Bachelor of Technology",
+      company: "Engineering Degree",
       location: "India",
       type: "education",
-      description: "Graduated with honors, focusing on software engineering and quality assurance principles.",
+      description: "Completed engineering education with focus on software development and quality engineering principles.",
       achievements: [
-        "CGPA: 8.5/10",
-        "Published research paper on automated testing",
-        "Led university coding club"
+        "Strong foundation in software engineering",
+        "Developed interest in quality assurance",
+        "Built programming and analytical skills"
       ]
     }
   ];
@@ -105,11 +105,20 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
           }`}>
             Career Journey
           </h2>
-          <p className={`text-xl ${
+          <p className={`text-xl mb-4 ${
             darkMode ? 'text-gray-300' : 'text-gray-600'
           }`}>
-            My professional growth and achievements over the years
+            My professional growth and achievements in Software Testing & Quality Engineering
           </p>
+          <a 
+            href="https://www.linkedin.com/in/syed-wilayath-khadari/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors duration-200`}
+          >
+            <span>View Full Profile on LinkedIn</span>
+            <ExternalLink size={16} />
+          </a>
           <div className="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
         </div>
 
@@ -128,7 +137,7 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
               </div>
 
               {/* Content */}
-              <div className={`ml-8 flex-1 p-6 rounded-lg shadow-md ${
+              <div className={`ml-8 flex-1 p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg ${
                 darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
               }`}>
                 <div className="flex items-center justify-between mb-3">
