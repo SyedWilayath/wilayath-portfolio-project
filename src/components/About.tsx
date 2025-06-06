@@ -64,8 +64,7 @@ const About: React.FC<AboutProps> = ({ darkMode }) => {
                 'UI Automation with Selenium WebDriver',
                 'AWS Cloud Services Integration',
                 'Team Leadership & Mentoring',
-                'Test Strategy & Planning',
-                'CI/CD Pipeline Integration'
+                'Test Strategy & Planning'
               ].map((item, index) => (
                 <div key={index} className="flex items-center space-x-3">
                   <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
