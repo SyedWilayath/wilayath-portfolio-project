@@ -9,7 +9,7 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
   const project = {
     title: 'IELTS',
     description: 'The International English Language Testing System (IELTS) is a globally recognized standardized test of English language proficiency for non-native English speakers. It is jointly managed by the British Council, IDP IELTS Australia, and Cambridge Assessment English. IELTS is widely accepted for academic, immigration, and professional purposes in many countries, including Australia, Canada, New Zealand, and the United Kingdom.',
-    techStack: ['Java', 'Selenium WebDriver', 'REST Assured', 'TestNG'],
+    techStack: ['Java', 'Selenium WebDriver', 'REST Assured', 'AWS'],
     highlights: [
       'Comprehensive test automation framework',
       'API and UI testing integration',
