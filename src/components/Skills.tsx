@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface SkillsProps {
@@ -11,7 +10,6 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
     { name: 'REST Assured', level: 90 },
     { name: 'Java', level: 88 },
     { name: 'API Testing', level: 92 },
-    { name: 'CI/CD', level: 85 },
     { name: 'Jira', level: 90 },
     { name: 'Confluence', level: 85 },
     { name: 'Agile Methodologies', level: 88 }
