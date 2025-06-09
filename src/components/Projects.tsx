@@ -1,5 +1,7 @@
 
 import React from 'react';
+import { Edit } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface ProjectsProps {
   darkMode: boolean;
@@ -18,13 +20,30 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
     ]
   };
 
+  const handleEdit = () => {
+    console.log('Edit Featured Project clicked');
+    // TODO: Implement edit functionality
+  };
+
   return (
     <section 
       id="projects" 
-      className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
+      className={`py-20 relative ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 relative">
+          <Button
+            onClick={handleEdit}
+            variant="outline"
+            size="sm"
+            className={`absolute top-0 right-0 ${
+              darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-700' : 'border-gray-300 text-gray-700 hover:bg-gray-100'
+            }`}
+          >
+            <Edit size={16} className="mr-2" />
+            Edit
+          </Button>
+          
           <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${
             darkMode ? 'text-white' : 'text-gray-900'
           }`}>
