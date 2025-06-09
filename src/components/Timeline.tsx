@@ -1,14 +1,26 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Calendar, MapPin, TrendingUp, Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import TimelineEditModal from './TimelineEditModal';
 
 interface TimelineProps {
   darkMode: boolean;
 }
 
+interface TimelineEvent {
+  id: number;
+  year: string;
+  title: string;
+  company: string;
+  location: string;
+  type: string;
+  description: string;
+  achievements: string[];
+}
+
 const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
-  const timelineEvents = [
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([
     {
       id: 1,
       year: "Sep 2023 - Present",
@@ -57,7 +69,7 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
         "Built foundation for career in Software Development Engineering in Test (SDET)"
       ]
     }
-  ];
+  ]);
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -73,133 +85,146 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
   };
 
   const handleEdit = () => {
-    console.log('Edit Career Journey clicked');
-    // TODO: Implement edit functionality
+    setIsEditModalOpen(true);
+  };
+
+  const handleSaveTimeline = (updatedEvents: TimelineEvent[]) => {
+    setTimelineEvents(updatedEvents);
   };
 
   return (
-    <section 
-      id="timeline" 
-      className={`py-20 relative ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}
-    >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 relative">
-          <Button
-            onClick={handleEdit}
-            variant="outline"
-            size="sm"
-            className={`absolute top-0 right-0 ${
-              darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-800' : 'border-gray-300 text-gray-700 hover:bg-gray-100'
-            }`}
-          >
-            <Edit size={16} className="mr-2" />
-            Edit
-          </Button>
-          
-          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${
-            darkMode ? 'text-white' : 'text-gray-900'
-          }`}>
-            Career Journey
-          </h2>
-          <p className={`text-xl mb-4 ${
-            darkMode ? 'text-gray-300' : 'text-gray-600'
-          }`}>
-            My professional experience in Software Testing & Quality Engineering at Cognizant
-          </p>
-          <div className="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
-        </div>
+    <>
+      <section 
+        id="timeline" 
+        className={`py-20 relative ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}
+      >
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 relative">
+            <Button
+              onClick={handleEdit}
+              variant="outline"
+              size="sm"
+              className={`absolute top-0 right-0 ${
+                darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-800' : 'border-gray-300 text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              <Edit size={16} className="mr-2" />
+              Edit
+            </Button>
+            
+            <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${
+              darkMode ? 'text-white' : 'text-gray-900'
+            }`}>
+              Career Journey
+            </h2>
+            <p className={`text-xl mb-4 ${
+              darkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}>
+              My professional experience in Software Testing & Quality Engineering at Cognizant
+            </p>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
+          </div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className={`absolute left-8 top-0 bottom-0 w-0.5 ${
-            darkMode ? 'bg-gray-700' : 'bg-gray-300'
-          }`}></div>
+          <div className="relative">
+            {/* Timeline line */}
+            <div className={`absolute left-8 top-0 bottom-0 w-0.5 ${
+              darkMode ? 'bg-gray-700' : 'bg-gray-300'
+            }`}></div>
 
-          {timelineEvents.map((event, index) => (
-            <div key={event.id} className="relative flex items-start mb-12">
-              {/* Timeline dot */}
-              <div className={`flex-shrink-0 w-16 h-16 rounded-full ${getTypeColor(event.type)} 
-                flex items-center justify-center text-white font-bold text-lg shadow-lg z-10`}>
-                💼
-              </div>
+            {timelineEvents.map((event, index) => (
+              <div key={event.id} className="relative flex items-start mb-12">
+                {/* Timeline dot */}
+                <div className={`flex-shrink-0 w-16 h-16 rounded-full ${getTypeColor(event.type)} 
+                  flex items-center justify-center text-white font-bold text-lg shadow-lg z-10`}>
+                  💼
+                </div>
 
-              {/* Content */}
-              <div className={`ml-8 flex-1 p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg ${
-                darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
-              }`}>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center space-x-2">
-                    <Calendar size={16} className={darkMode ? 'text-gray-400' : 'text-gray-500'} />
-                    <span className={`font-bold ${
+                {/* Content */}
+                <div className={`ml-8 flex-1 p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg ${
+                  darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
+                }`}>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center space-x-2">
+                      <Calendar size={16} className={darkMode ? 'text-gray-400' : 'text-gray-500'} />
+                      <span className={`font-bold ${
+                        darkMode ? 'text-blue-400' : 'text-blue-600'
+                      }`}>
+                        {event.year}
+                      </span>
+                    </div>
+                    {event.type === 'current' && (
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        darkMode ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-800'
+                      }`}>
+                        Current
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 className={`text-xl font-bold mb-2 ${
+                    darkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
+                    {event.title}
+                  </h3>
+
+                  <div className="flex items-center mb-3">
+                    <h4 className={`text-lg font-medium ${
                       darkMode ? 'text-blue-400' : 'text-blue-600'
                     }`}>
-                      {event.year}
-                    </span>
+                      {event.company}
+                    </h4>
+                    <div className="flex items-center ml-4 text-sm">
+                      <MapPin size={14} className={`mr-1 ${
+                        darkMode ? 'text-gray-400' : 'text-gray-500'
+                      }`} />
+                      <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>
+                        {event.location}
+                      </span>
+                    </div>
                   </div>
-                  {event.type === 'current' && (
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      darkMode ? 'bg-green-900 text-green-300' : 'bg-green-100 text-green-800'
-                    }`}>
-                      Current
-                    </span>
-                  )}
-                </div>
 
-                <h3 className={`text-xl font-bold mb-2 ${
-                  darkMode ? 'text-white' : 'text-gray-900'
-                }`}>
-                  {event.title}
-                </h3>
-
-                <div className="flex items-center mb-3">
-                  <h4 className={`text-lg font-medium ${
-                    darkMode ? 'text-blue-400' : 'text-blue-600'
+                  <p className={`mb-4 ${
+                    darkMode ? 'text-gray-300' : 'text-gray-700'
                   }`}>
-                    {event.company}
-                  </h4>
-                  <div className="flex items-center ml-4 text-sm">
-                    <MapPin size={14} className={`mr-1 ${
-                      darkMode ? 'text-gray-400' : 'text-gray-500'
-                    }`} />
-                    <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>
-                      {event.location}
-                    </span>
-                  </div>
-                </div>
+                    {event.description}
+                  </p>
 
-                <p className={`mb-4 ${
-                  darkMode ? 'text-gray-300' : 'text-gray-700'
-                }`}>
-                  {event.description}
-                </p>
-
-                <div>
-                  <div className="flex items-center mb-2">
-                    <TrendingUp size={16} className={`mr-2 ${
-                      darkMode ? 'text-green-400' : 'text-green-600'
-                    }`} />
-                    <span className={`font-medium ${
-                      darkMode ? 'text-gray-300' : 'text-gray-700'
-                    }`}>
-                      Key Achievements:
-                    </span>
-                  </div>
-                  <ul className="list-disc list-inside space-y-1">
-                    {event.achievements.map((achievement, idx) => (
-                      <li key={idx} className={`text-sm ${
-                        darkMode ? 'text-gray-400' : 'text-gray-600'
+                  <div>
+                    <div className="flex items-center mb-2">
+                      <TrendingUp size={16} className={`mr-2 ${
+                        darkMode ? 'text-green-400' : 'text-green-600'
+                      }`} />
+                      <span className={`font-medium ${
+                        darkMode ? 'text-gray-300' : 'text-gray-700'
                       }`}>
-                        {achievement}
-                      </li>
-                    ))}
-                  </ul>
+                        Key Achievements:
+                      </span>
+                    </div>
+                    <ul className="list-disc list-inside space-y-1">
+                      {event.achievements.map((achievement, idx) => (
+                        <li key={idx} className={`text-sm ${
+                          darkMode ? 'text-gray-400' : 'text-gray-600'
+                        }`}>
+                          {achievement}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <TimelineEditModal
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        timelineEvents={timelineEvents}
+        onSave={handleSaveTimeline}
+        darkMode={darkMode}
+      />
+    </>
   );
 };
 
