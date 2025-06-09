@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,6 +15,7 @@ interface Skill {
 
 const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   
   const defaultSkills: Skill[] = [
     { name: 'Selenium', level: 95 },
@@ -40,6 +42,8 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
         setSkills(defaultSkills);
       }
     }
+    // Set initialized flag after loading to prevent animation
+    setIsInitialized(true);
   }, []);
 
   const handleEdit = () => {
@@ -105,7 +109,9 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
                   darkMode ? 'bg-gray-700' : 'bg-gray-200'
                 }`}>
                   <div 
-                    className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-1000 ease-out"
+                    className={`bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full ${
+                      isInitialized ? 'transition-all duration-1000 ease-out' : ''
+                    }`}
                     style={{ width: `${skill.level}%` }}
                   ></div>
                 </div>
