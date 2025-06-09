@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,6 +27,11 @@ interface TestimonialEditModalProps {
 
 const TestimonialEditModal: React.FC<TestimonialEditModalProps> = ({ isOpen, onClose, testimonials, onSave, darkMode }) => {
   const [editableTestimonials, setEditableTestimonials] = useState<Testimonial[]>(testimonials);
+
+  // Sync with current testimonials when modal opens or testimonials change
+  useEffect(() => {
+    setEditableTestimonials(testimonials);
+  }, [testimonials, isOpen]);
 
   const addTestimonial = () => {
     const newId = Math.max(...editableTestimonials.map(t => t.id), 0) + 1;
@@ -60,8 +65,14 @@ const TestimonialEditModal: React.FC<TestimonialEditModalProps> = ({ isOpen, onC
     onClose();
   };
 
+  const handleClose = () => {
+    // Reset to current testimonials when closing without saving
+    setEditableTestimonials(testimonials);
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className={`max-w-4xl max-h-[80vh] overflow-y-auto ${
         darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
       }`}>
@@ -158,7 +169,7 @@ const TestimonialEditModal: React.FC<TestimonialEditModalProps> = ({ isOpen, onC
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSave}>Save Changes</Button>
         </DialogFooter>
       </DialogContent>

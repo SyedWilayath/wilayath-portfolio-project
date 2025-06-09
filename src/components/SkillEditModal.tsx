@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,6 +22,11 @@ interface SkillEditModalProps {
 const SkillEditModal: React.FC<SkillEditModalProps> = ({ isOpen, onClose, skills, onSave, darkMode }) => {
   const [editableSkills, setEditableSkills] = useState<Skill[]>(skills);
 
+  // Sync with current skills when modal opens or skills change
+  useEffect(() => {
+    setEditableSkills(skills);
+  }, [skills, isOpen]);
+
   const addSkill = () => {
     setEditableSkills([...editableSkills, { name: '', level: 0 }]);
   };
@@ -43,8 +48,14 @@ const SkillEditModal: React.FC<SkillEditModalProps> = ({ isOpen, onClose, skills
     onClose();
   };
 
+  const handleClose = () => {
+    // Reset to current skills when closing without saving
+    setEditableSkills(skills);
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className={`max-w-2xl max-h-[80vh] overflow-y-auto ${
         darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
       }`}>
@@ -94,7 +105,7 @@ const SkillEditModal: React.FC<SkillEditModalProps> = ({ isOpen, onClose, skills
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSave}>Save Changes</Button>
         </DialogFooter>
       </DialogContent>

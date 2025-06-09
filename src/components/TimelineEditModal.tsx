@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,6 +28,11 @@ interface TimelineEditModalProps {
 
 const TimelineEditModal: React.FC<TimelineEditModalProps> = ({ isOpen, onClose, timelineEvents, onSave, darkMode }) => {
   const [editableEvents, setEditableEvents] = useState<TimelineEvent[]>(timelineEvents);
+
+  // Sync with current timeline events when modal opens or events change
+  useEffect(() => {
+    setEditableEvents(timelineEvents);
+  }, [timelineEvents, isOpen]);
 
   const addEvent = () => {
     const newId = Math.max(...editableEvents.map(e => e.id), 0) + 1;
@@ -94,8 +99,14 @@ const TimelineEditModal: React.FC<TimelineEditModalProps> = ({ isOpen, onClose, 
     onClose();
   };
 
+  const handleClose = () => {
+    // Reset to current events when closing without saving
+    setEditableEvents(timelineEvents);
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className={`max-w-6xl max-h-[80vh] overflow-y-auto ${
         darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
       }`}>
@@ -221,7 +232,7 @@ const TimelineEditModal: React.FC<TimelineEditModalProps> = ({ isOpen, onClose, 
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSave}>Save Changes</Button>
         </DialogFooter>
       </DialogContent>

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,6 +24,11 @@ interface ProjectEditModalProps {
 
 const ProjectEditModal: React.FC<ProjectEditModalProps> = ({ isOpen, onClose, project, onSave, darkMode }) => {
   const [editableProject, setEditableProject] = useState<Project>(project);
+
+  // Sync with current project when modal opens or project changes
+  useEffect(() => {
+    setEditableProject(project);
+  }, [project, isOpen]);
 
   const addTech = () => {
     setEditableProject({
@@ -77,8 +82,14 @@ const ProjectEditModal: React.FC<ProjectEditModalProps> = ({ isOpen, onClose, pr
     onClose();
   };
 
+  const handleClose = () => {
+    // Reset to current project when closing without saving
+    setEditableProject(project);
+    onClose();
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className={`max-w-4xl max-h-[80vh] overflow-y-auto ${
         darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'
       }`}>
@@ -164,7 +175,7 @@ const ProjectEditModal: React.FC<ProjectEditModalProps> = ({ isOpen, onClose, pr
         </div>
 
         <DialogFooter>
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+          <Button variant="outline" onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSave}>Save Changes</Button>
         </DialogFooter>
       </DialogContent>
