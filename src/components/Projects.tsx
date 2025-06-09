@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import ProjectEditModal from './ProjectEditModal';
@@ -17,7 +16,8 @@ interface Project {
 
 const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [project, setProject] = useState<Project>({
+  
+  const defaultProject: Project = {
     title: 'IELTS',
     description: 'The International English Language Testing System (IELTS) is a globally recognized standardized test of English language proficiency for non-native English speakers. It is jointly managed by the British Council, IDP IELTS Australia, and Cambridge Assessment English. IELTS is widely accepted for academic, immigration, and professional purposes in many countries, including Australia, Canada, New Zealand, and the United Kingdom.',
     techStack: ['Java', 'Selenium WebDriver', 'REST Assured', 'AWS'],
@@ -27,7 +27,23 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
       'Cross-browser compatibility testing',
       'Continuous integration pipeline'
     ]
-  });
+  };
+
+  const [project, setProject] = useState<Project>(defaultProject);
+
+  // Load project from localStorage on component mount
+  useEffect(() => {
+    const savedProject = localStorage.getItem('portfolio-project');
+    if (savedProject) {
+      try {
+        const parsedProject = JSON.parse(savedProject);
+        setProject(parsedProject);
+      } catch (error) {
+        console.error('Error parsing saved project:', error);
+        setProject(defaultProject);
+      }
+    }
+  }, []);
 
   const handleEdit = () => {
     setIsEditModalOpen(true);
@@ -35,6 +51,8 @@ const Projects: React.FC<ProjectsProps> = ({ darkMode }) => {
 
   const handleSaveProject = (updatedProject: Project) => {
     setProject(updatedProject);
+    // Save to localStorage
+    localStorage.setItem('portfolio-project', JSON.stringify(updatedProject));
   };
 
   return (

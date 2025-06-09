@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Star, Quote, Edit } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -21,7 +20,8 @@ interface Testimonial {
 
 const Testimonials: React.FC<TestimonialsProps> = ({ darkMode }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([
+  
+  const defaultTestimonials: Testimonial[] = [
     {
       id: 1,
       name: "Sarah Johnson",
@@ -49,7 +49,23 @@ const Testimonials: React.FC<TestimonialsProps> = ({ darkMode }) => {
       rating: 5,
       avatar: "ER"
     }
-  ]);
+  ];
+
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(defaultTestimonials);
+
+  // Load testimonials from localStorage on component mount
+  useEffect(() => {
+    const savedTestimonials = localStorage.getItem('portfolio-testimonials');
+    if (savedTestimonials) {
+      try {
+        const parsedTestimonials = JSON.parse(savedTestimonials);
+        setTestimonials(parsedTestimonials);
+      } catch (error) {
+        console.error('Error parsing saved testimonials:', error);
+        setTestimonials(defaultTestimonials);
+      }
+    }
+  }, []);
 
   const handleEdit = () => {
     setIsEditModalOpen(true);
@@ -57,6 +73,8 @@ const Testimonials: React.FC<TestimonialsProps> = ({ darkMode }) => {
 
   const handleSaveTestimonials = (updatedTestimonials: Testimonial[]) => {
     setTestimonials(updatedTestimonials);
+    // Save to localStorage
+    localStorage.setItem('portfolio-testimonials', JSON.stringify(updatedTestimonials));
   };
 
   return (

@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SkillEditModal from './SkillEditModal';
@@ -15,7 +14,8 @@ interface Skill {
 
 const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [skills, setSkills] = useState<Skill[]>([
+  
+  const defaultSkills: Skill[] = [
     { name: 'Selenium', level: 95 },
     { name: 'REST Assured', level: 90 },
     { name: 'Java', level: 88 },
@@ -24,7 +24,23 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
     { name: 'Jira', level: 90 },
     { name: 'Confluence', level: 85 },
     { name: 'Agile Methodologies', level: 88 }
-  ]);
+  ];
+
+  const [skills, setSkills] = useState<Skill[]>(defaultSkills);
+
+  // Load skills from localStorage on component mount
+  useEffect(() => {
+    const savedSkills = localStorage.getItem('portfolio-skills');
+    if (savedSkills) {
+      try {
+        const parsedSkills = JSON.parse(savedSkills);
+        setSkills(parsedSkills);
+      } catch (error) {
+        console.error('Error parsing saved skills:', error);
+        setSkills(defaultSkills);
+      }
+    }
+  }, []);
 
   const handleEdit = () => {
     setIsEditModalOpen(true);
@@ -32,6 +48,8 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
 
   const handleSaveSkills = (updatedSkills: Skill[]) => {
     setSkills(updatedSkills);
+    // Save to localStorage
+    localStorage.setItem('portfolio-skills', JSON.stringify(updatedSkills));
   };
 
   return (

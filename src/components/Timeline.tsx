@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, TrendingUp, Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import TimelineEditModal from './TimelineEditModal';
@@ -20,7 +20,8 @@ interface TimelineEvent {
 
 const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([
+  
+  const defaultTimelineEvents: TimelineEvent[] = [
     {
       id: 1,
       year: "Sep 2023 - Present",
@@ -69,7 +70,23 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
         "Built foundation for career in Software Development Engineering in Test (SDET)"
       ]
     }
-  ]);
+  ];
+
+  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>(defaultTimelineEvents);
+
+  // Load timeline events from localStorage on component mount
+  useEffect(() => {
+    const savedTimeline = localStorage.getItem('portfolio-timeline');
+    if (savedTimeline) {
+      try {
+        const parsedTimeline = JSON.parse(savedTimeline);
+        setTimelineEvents(parsedTimeline);
+      } catch (error) {
+        console.error('Error parsing saved timeline:', error);
+        setTimelineEvents(defaultTimelineEvents);
+      }
+    }
+  }, []);
 
   const getTypeColor = (type: string) => {
     switch (type) {
@@ -90,6 +107,8 @@ const Timeline: React.FC<TimelineProps> = ({ darkMode }) => {
 
   const handleSaveTimeline = (updatedEvents: TimelineEvent[]) => {
     setTimelineEvents(updatedEvents);
+    // Save to localStorage
+    localStorage.setItem('portfolio-timeline', JSON.stringify(updatedEvents));
   };
 
   return (
