@@ -42,8 +42,10 @@ const Skills: React.FC<SkillsProps> = ({ darkMode }) => {
         setSkills(defaultSkills);
       }
     }
-    // Set initialized flag after loading to prevent animation
-    setIsInitialized(true);
+    // Delay enabling animation until after the component has rendered with correct values
+    setTimeout(() => {
+      setIsInitialized(true);
+    }, 100);
   }, []);
 
   const handleEdit = () => {
