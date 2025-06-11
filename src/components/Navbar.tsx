@@ -30,12 +30,12 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-500 backdrop-blur-md ${
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-700 backdrop-blur-md ${
       darkMode ? 'bg-gray-900/95' : 'bg-white/95'
-    } border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'} shadow-lg`}>
+    } border-b ${darkMode ? 'border-gray-700' : 'border-gray-200'} shadow-lg hover:shadow-xl`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="font-bold text-xl transition-all duration-300 hover:scale-110">
+          <div className="font-bold text-xl transition-all duration-500 hover:scale-110 hover:text-blue-600 cursor-pointer">
             <span className={`animate-fade-in ${darkMode ? 'text-white' : 'text-gray-900'}`}>
               Syed Wilayath
             </span>
@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className={`transition-all duration-300 hover:text-blue-600 hover:scale-110 text-sm relative group animate-fade-in ${
+                className={`transition-all duration-500 hover:text-blue-600 hover:scale-110 text-sm relative group animate-fade-in ${
                   darkMode ? 'text-gray-300' : 'text-gray-700'
                 }`}
                 style={{ 
@@ -56,18 +56,20 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
                 }}
               >
                 {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-500 group-hover:w-full group-hover:shadow-lg group-hover:shadow-blue-600/50"></span>
               </button>
             ))}
             <button
               onClick={toggleDarkMode}
-              className={`p-2 rounded-lg transition-all duration-300 hover:scale-125 hover:rotate-180 ${
+              className={`p-2 rounded-lg transition-all duration-500 hover:scale-125 hover:rotate-180 group ${
                 darkMode 
-                  ? 'text-gray-300 hover:text-white hover:bg-gray-800' 
-                  : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                  ? 'text-gray-300 hover:text-white hover:bg-gray-800 hover:shadow-lg' 
+                  : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 hover:shadow-lg'
               }`}
             >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              <div className="transition-all duration-500 group-hover:animate-pulse">
+                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              </div>
             </button>
           </div>
 
@@ -75,17 +77,19 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
           <div className="lg:hidden flex items-center space-x-2">
             <button
               onClick={toggleDarkMode}
-              className={`p-2 rounded-lg transition-all duration-300 hover:scale-125 hover:rotate-180 ${
+              className={`p-2 rounded-lg transition-all duration-500 hover:scale-125 hover:rotate-180 group ${
                 darkMode 
-                  ? 'text-gray-300 hover:text-white hover:bg-gray-800' 
-                  : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                  ? 'text-gray-300 hover:text-white hover:bg-gray-800 hover:shadow-lg' 
+                  : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100 hover:shadow-lg'
               }`}
             >
-              {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              <div className="transition-all duration-500 group-hover:animate-pulse">
+                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              </div>
             </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 ${
+              className={`p-2 rounded-lg transition-all duration-500 hover:scale-110 hover:shadow-lg ${
                 darkMode 
                   ? 'text-gray-300 hover:text-white hover:bg-gray-800' 
                   : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
@@ -94,11 +98,11 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
               <div className="relative">
                 <Menu 
                   size={24} 
-                  className={`transition-all duration-300 ${isMenuOpen ? 'opacity-0 rotate-180' : 'opacity-100 rotate-0'}`}
+                  className={`transition-all duration-500 ${isMenuOpen ? 'opacity-0 rotate-180 scale-0' : 'opacity-100 rotate-0 scale-100'}`}
                 />
                 <X 
                   size={24} 
-                  className={`absolute top-0 left-0 transition-all duration-300 ${isMenuOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-180'}`}
+                  className={`absolute top-0 left-0 transition-all duration-500 ${isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-180 scale-0'}`}
                 />
               </div>
             </button>
@@ -106,7 +110,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`lg:hidden overflow-hidden transition-all duration-500 ${
+        <div className={`lg:hidden overflow-hidden transition-all duration-700 ${
           isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         } border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
           <div className="py-4 space-y-2">
@@ -114,7 +118,7 @@ const Navbar: React.FC<NavbarProps> = ({ darkMode, toggleDarkMode }) => {
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className={`block w-full text-left py-3 px-4 transition-all duration-300 hover:text-blue-600 hover:bg-opacity-50 hover:translate-x-2 animate-fade-in ${
+                className={`block w-full text-left py-3 px-4 transition-all duration-500 hover:text-blue-600 hover:bg-opacity-50 hover:translate-x-4 hover:scale-105 animate-fade-in ${
                   darkMode ? 'text-gray-300 hover:bg-gray-800' : 'text-gray-700 hover:bg-gray-100'
                 }`}
                 style={{ 
