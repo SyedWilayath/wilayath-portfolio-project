@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Star, Quote, Edit } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -84,12 +85,12 @@ const Testimonials: React.FC<TestimonialsProps> = ({ darkMode }) => {
         className={`py-20 relative ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 relative">
+          <div className="text-center mb-16 relative animate-fade-in">
             <Button
               onClick={handleEdit}
               variant="outline"
               size="sm"
-              className={`absolute top-0 right-0 ${
+              className={`absolute top-0 right-0 transition-all duration-300 hover:scale-110 hover:rotate-12 ${
                 darkMode ? 'border-gray-600 text-gray-300 hover:bg-gray-800' : 'border-gray-300 text-gray-700 hover:bg-gray-100'
               }`}
             >
@@ -97,35 +98,43 @@ const Testimonials: React.FC<TestimonialsProps> = ({ darkMode }) => {
               Edit
             </Button>
             
-            <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${
+            <h2 className={`text-4xl md:text-5xl font-bold mb-4 transition-all duration-500 hover:scale-105 ${
               darkMode ? 'text-white' : 'text-gray-900'
             }`}>
               Client Testimonials
             </h2>
-            <p className={`text-xl ${
+            <p className={`text-xl animate-fade-in ${
               darkMode ? 'text-gray-300' : 'text-gray-600'
-            }`}>
+            }`}
+            style={{ animationDelay: '0.2s', animationFillMode: 'both' }}>
               What colleagues and clients say about working with me
             </p>
-            <div className="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
+            <div className="w-24 h-1 bg-blue-600 mx-auto mt-4 transform scale-x-0 animate-[scale-in_0.8s_ease-out_0.4s_forwards]"></div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial) => (
+            {testimonials.map((testimonial, index) => (
               <Card 
                 key={testimonial.id}
-                className={`transition-all duration-300 hover:transform hover:scale-105 relative ${
+                className={`transition-all duration-500 hover:transform hover:scale-105 hover:-translate-y-4 relative group animate-fade-in ${
                   darkMode 
-                    ? 'bg-gray-800 border-gray-700' 
-                    : 'bg-white border-gray-200'
+                    ? 'bg-gray-800 border-gray-700 hover:shadow-2xl hover:shadow-blue-500/30' 
+                    : 'bg-white border-gray-200 hover:shadow-2xl hover:shadow-blue-500/20'
                 }`}
+                style={{ 
+                  animationDelay: `${index * 0.2}s`,
+                  animationFillMode: 'both'
+                }}
               >
-                <CardContent className="p-6">
-                  <Quote className={`w-8 h-8 mb-4 ${
+                <CardContent className="p-6 relative overflow-hidden">
+                  {/* Animated background gradient */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500 bg-gradient-to-br from-blue-500 to-purple-600"></div>
+                  
+                  <Quote className={`w-8 h-8 mb-4 transition-all duration-300 group-hover:scale-125 group-hover:rotate-12 ${
                     darkMode ? 'text-blue-400' : 'text-blue-600'
                   }`} />
                   
-                  <p className={`text-base mb-6 leading-relaxed ${
+                  <p className={`text-base mb-6 leading-relaxed transition-all duration-300 group-hover:text-opacity-90 ${
                     darkMode ? 'text-gray-300' : 'text-gray-700'
                   }`}>
                     "{testimonial.content}"
@@ -136,24 +145,28 @@ const Testimonials: React.FC<TestimonialsProps> = ({ darkMode }) => {
                       <Star 
                         key={i} 
                         size={16} 
-                        className="text-yellow-400 fill-current" 
+                        className="text-yellow-400 fill-current transition-all duration-300 hover:scale-125 animate-pulse" 
+                        style={{ 
+                          animationDelay: `${i * 0.1}s`,
+                          animationDuration: '2s'
+                        }}
                       />
                     ))}
                   </div>
 
                   <div className="flex items-center">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold mr-4 ${
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold mr-4 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 ${
                       darkMode ? 'bg-blue-600' : 'bg-blue-500'
                     }`}>
                       {testimonial.avatar}
                     </div>
                     <div>
-                      <h4 className={`font-semibold ${
+                      <h4 className={`font-semibold transition-colors duration-300 ${
                         darkMode ? 'text-white' : 'text-gray-900'
                       }`}>
                         {testimonial.name}
                       </h4>
-                      <p className={`text-sm ${
+                      <p className={`text-sm transition-colors duration-300 ${
                         darkMode ? 'text-gray-400' : 'text-gray-600'
                       }`}>
                         {testimonial.role} at {testimonial.company}
